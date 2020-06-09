@@ -38,11 +38,11 @@
 
           <select class="form-control" id="rating" name="rating">
             <option value="">Select</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+            <option {{ (old('rating') == 1) ? 'selected':'' }} value="1">1</option>
+            <option {{ (old('rating') == 2) ? 'selected':'' }} value="2">2</option>
+            <option {{ (old('rating') == 3) ? 'selected':'' }} value="3">3</option>
+            <option {{ (old('rating') == 4) ? 'selected':'' }} value="4">4</option>
+            <option {{ (old('rating') == 5) ? 'selected':'' }} value="5">5</option>
           </select>
           @if($errors->has('rating'))
             <span><label class="error pull-right">{{$errors->first('rating')}}</label></span>
@@ -57,7 +57,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="headline">Title</label>
-          <input type="input" class="form-control" id="headline" name="title">
+          <input type="input" class="form-control" id="headline" name="title" value="{{ old('title') }}">
           @if($errors->has('title'))
             <span><label class="error pull-right">{{$errors->first('title')}}</label></span>
           @endif
@@ -72,7 +72,7 @@
         <div class="form-group">
           <label for="description">Description</label>
 
-          <textarea class="form-control" id="description" name="description"></textarea>
+          <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
           @if($errors->has('description'))
             <span><label class="error pull-right">{{$errors->first('description')}}</label></span>
           @endif
