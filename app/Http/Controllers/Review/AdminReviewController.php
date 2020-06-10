@@ -26,9 +26,16 @@ class AdminReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($model_id = 0)
     {
-        $reviews = $this->reviewService->listAllReviews();
+        if($model_id){
+            $where = ['model_id' => $model_id];
+            $reviews = $this->reviewService->findReviewBy($where);
+        }
+        else{
+            $reviews = $this->reviewService->listAllReviews();
+        }
+
         if($reviews){
             foreach ($reviews as $review) {
                 $fan_details = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'usertype' => 3]);
@@ -79,5 +86,27 @@ class AdminReviewController extends Controller
         if($response){
             return response()->json(array('message'=>'Successfully updated package status'));
         }
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all_models()
+    {
+        $where = ['usertype' => 2];
+        $models = $this->userService->findUserBy($where);
+
+        if($models){
+            foreach ($models as $model) {
+                $model_rating = $this->reviewService->getAverageRating($model['id']);
+                $total_rating = $this->reviewService->getTotalRating($model['id']);
+                $model['rating'] = $model_rating;
+                $model['total'] = $total_rating;
+            }
+        }
+        return view('review.admin.all-models',compact('models'));
     }
 }

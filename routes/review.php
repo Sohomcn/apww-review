@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+//use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +14,17 @@ Route::group(['prefix' => 'reviews', 'namespace' => 'Review', 'middleware'=>['au
 
     Route::group(['middleware'=>['auth.admin']], function() {
         //admin
-        Route::get('/all', 'AdminReviewController@index')->name('admin.review.index');
+        Route::get('/all/{model_id?}', 'AdminReviewController@index')->name('admin.review.index');
         Route::get('/show/{review_id}', 'AdminReviewController@show')->name('admin.review.show');
         Route::get('/delete/{review_id}', 'AdminReviewController@destroy')->name('admin.review.delete');
         Route::post('/update-status', 'AdminReviewController@updateStatus')->name('admin.review.updateStatus');
+        Route::get('/all-models', 'AdminReviewController@all_models')->name('admin.review.all-models');
     });
 
 
     Route::group(['middleware'=>['auth.model']], function() {
+        //model
+        Route::get('/models/my-review', 'ModelReviewController@index')->name('model.review.index');
 
     });
 

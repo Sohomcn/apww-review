@@ -24,7 +24,7 @@
                     @if(Auth::User()->usertype==1)
                         <a href="{{route('admin.review.index')}}"> Go to review section </a>
                     @elseif(Auth::User()->usertype==2)
-                        <a href="{{route('fan.review.models',['model_id' =>Auth::User()->id])}}"> Go to review section </a>
+                        <a href="{{route('model.review.index')}}"> Go to review section </a>
                     @else
                         <a href="{{route('fan.review.index')}}"> Go to review section </a>
                     @endif

@@ -20,7 +20,8 @@
         </div>
     </div>
     <br>
-
+    <a href="{{route('admin.review.index')}}">All Review</a> &nbsp;
+    <a href="{{route('admin.review.all-models')}}">All Models</a>
   <table class="table" id="sampleTable">
     <thead>
       <tr>
