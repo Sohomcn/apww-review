@@ -16,7 +16,7 @@
   <table class="table" id="sampleTable">
     <thead>
       <tr>
-        <th>Fan Name</th>
+        <th>Model Name</th>
         <th>Rating</th>
         <th>Title</th>
         <th>Body</th>
@@ -28,12 +28,11 @@
       @if($reviews)
         @foreach($reviews as $review)
           <tr>
-            <td>{{$review->fan_name}}</td>
+            <td>{{$review->model_name}}</td>
             <td>{{$review->rating}}</td>
             <td>{{$review->title}}</td>
             <td>{{$review->body}}</td>
             <td>{{ \Carbon\Carbon::parse($review->created_at)->diffForHumans() }}</td>
-
           </tr>
 
         @endforeach

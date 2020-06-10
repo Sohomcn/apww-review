@@ -116,12 +116,9 @@ class FanReviewController extends Controller
     {
         $reviews = $this->reviewService->findReviewBy(['fan_id' => Auth::User()->id, 'is_approved' => 1,'is_active' => 1]);
 
-        $fan_details = $this->userService->findOneUserByOrFail(['id' => Auth::User()->id, 'usertype' => 3]);
-
         if($reviews){
             foreach ($reviews as $review) {
                 $model_details = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'usertype' => 2]);
-                $review['fan_name']     = $fan_details['name'];
                 $review['model_name']   = $model_details['name'];
             }
         }
