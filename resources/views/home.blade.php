@@ -15,15 +15,15 @@
                     @endif
 
                     You are logged in as
-                    @if(Auth::User()->user_type==1) Admin
-                    @elseif(Auth::User()->user_type==2) Model
+                    @if(Auth::User()->usertype==1) Admin
+                    @elseif(Auth::User()->usertype==2) Model
                     @else Fan
                     @endif
 
                     <br>
-                    @if(Auth::User()->user_type==1)
+                    @if(Auth::User()->usertype==1)
                         <a href="{{route('admin.review.index')}}"> Go to review section </a>
-                    @elseif(Auth::User()->user_type==2)
+                    @elseif(Auth::User()->usertype==2)
                         <a href="{{route('fan.review.models',['model_id' =>Auth::User()->id])}}"> Go to review section </a>
                     @else
                         <a href="{{route('fan.review.index')}}"> Go to review section </a>

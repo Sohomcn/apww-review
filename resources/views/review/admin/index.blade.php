@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">All Reviews for @if(Auth::User()->user_type==1) Admin @elseif(Auth::User()->user_type==2) Model @endif</div>
+                <div class="card-header">All Reviews for @if(Auth::User()->usertype==1) Admin @elseif(Auth::User()->usertype==2) Model @endif</div>
 
 
             </div>

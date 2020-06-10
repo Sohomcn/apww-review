@@ -27,7 +27,7 @@ class FanReviewController extends Controller
      */
     public function index()
     {
-        $where = ['user_type' => 2];
+        $where = ['usertype' => 2];
         $models = $this->userService->findUserBy($where);
 
         if($models){
@@ -48,7 +48,7 @@ class FanReviewController extends Controller
      */
     public function create($model_id)
     {
-        $model_details = $this->userService->findOneUserByOrFail(['id' => $model_id, 'user_type' => 2]);
+        $model_details = $this->userService->findOneUserByOrFail(['id' => $model_id, 'usertype' => 2]);
         return view('review.fan.create',compact('model_details'));
     }
 
@@ -92,13 +92,13 @@ class FanReviewController extends Controller
     {
         $reviews = $this->reviewService->findReviewBy(['model_id' => $model_id, 'is_approved' => 1,'is_active' => 1]);
 
-        $model_details = $this->userService->findOneUserByOrFail(['id' => $model_id, 'user_type' => 2]);
+        $model_details = $this->userService->findOneUserByOrFail(['id' => $model_id, 'usertype' => 2]);
         $model_rating = $this->reviewService->getAverageRating($model_id);
         $total_rating = $this->reviewService->getTotalRating($model_id);
 
         if($reviews){
             foreach ($reviews as $review) {
-                $fan_details = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'user_type' => 3]);
+                $fan_details = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'usertype' => 3]);
                 $review['fan_name'] = $fan_details['name'];
                 $review['model_name'] = $model_details['name'];
             }
@@ -116,11 +116,11 @@ class FanReviewController extends Controller
     {
         $reviews = $this->reviewService->findReviewBy(['fan_id' => Auth::User()->id, 'is_approved' => 1,'is_active' => 1]);
 
-        $fan_details = $this->userService->findOneUserByOrFail(['id' => Auth::User()->id, 'user_type' => 3]);
+        $fan_details = $this->userService->findOneUserByOrFail(['id' => Auth::User()->id, 'usertype' => 3]);
 
         if($reviews){
             foreach ($reviews as $review) {
-                $model_details = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'user_type' => 2]);
+                $model_details = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'usertype' => 2]);
                 $review['fan_name']     = $fan_details['name'];
                 $review['model_name']   = $model_details['name'];
             }

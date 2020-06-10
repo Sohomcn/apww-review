@@ -112,7 +112,7 @@ class ReviewRepository extends BaseRepository implements ReviewContract
      */
     public function getAverageRating($id)
     {
-        return $this->model->where(['model_id' => $id, 'is_approved' => 1,'is_active' => 1])->avg('rating');
+        return $this->model->where(['model_id' => $id/*, 'is_approved' => 1,'is_active' => 1*/])->avg('rating');
     }
 
     /**
@@ -121,7 +121,7 @@ class ReviewRepository extends BaseRepository implements ReviewContract
      */
     public function getTotalRating($id)
     {
-        return $this->model->where(['model_id' => $id, 'is_approved' => 1,'is_active' => 1])->count('rating');
+        return $this->model->where(['model_id' => $id/*, 'is_approved' => 1,'is_active' => 1*/])->count('rating');
     }
 
 

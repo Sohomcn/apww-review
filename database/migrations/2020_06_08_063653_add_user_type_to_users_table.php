@@ -14,7 +14,7 @@ class AddUserTypeToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('user_type')->after('name')->default(0)->comment('1 = Admin, 2 = Model, 3 = Fan');
+            $table->tinyInteger('usertype')->after('name')->default(0)->comment('1 = Admin, 2 = Model, 3 = Fan');
         });
 
     }
@@ -27,7 +27,7 @@ class AddUserTypeToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['user_type']);
+            $table->dropColumn(['usertype']);
         });
     }
 }

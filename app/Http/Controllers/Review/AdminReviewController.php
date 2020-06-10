@@ -31,8 +31,8 @@ class AdminReviewController extends Controller
         $reviews = $this->reviewService->listAllReviews();
         if($reviews){
             foreach ($reviews as $review) {
-                $fan_details = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'user_type' => 3]);
-                $model_details = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'user_type' => 2]);
+                $fan_details = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'usertype' => 3]);
+                $model_details = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'usertype' => 2]);
                 $review['fan_name'] = $fan_details['name'];
                 $review['model_name'] = $model_details['name'];
             }
@@ -50,8 +50,8 @@ class AdminReviewController extends Controller
     public function show($id)
     {
         $review = $this->reviewService->findReviewById($id);
-        $fan_detail = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'user_type' => 3]);
-        $model_detail = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'user_type' => 2]);
+        $fan_detail = $this->userService->findOneUserByOrFail(['id' => $review['fan_id'], 'usertype' => 3]);
+        $model_detail = $this->userService->findOneUserByOrFail(['id' => $review['model_id'], 'usertype' => 2]);
         $review['fan_name'] = $fan_detail['name'];
         $review['model_name'] = $model_detail['name'];
         return view('review.admin.show',compact('review'));
