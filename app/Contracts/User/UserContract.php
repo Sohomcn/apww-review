@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Review;
+namespace App\Contracts\User;
 
 /**
  * Interface AdsContract

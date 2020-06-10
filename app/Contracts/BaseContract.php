@@ -1,11 +1,7 @@
 <?php
 
-namespace App\Contracts\Review;
+namespace App\Contracts;
 
-/**
- * Interface BaseContract
- * @package App\Contracts
- */
 interface BaseContract
 {
     /**
@@ -24,15 +20,6 @@ interface BaseContract
     public function update(array $attributes, int $id);
 
     /**
-     * Return all model rows
-     * @param array $columns
-     * @param string $orderBy
-     * @param string $sortBy
-     * @return mixed
-     */
-    public function all($columns = array('*'), string $orderBy = 'id', string $sortBy = 'desc');
-
-    /**
      * Find one by ID
      * @param int $id
      * @return mixed
@@ -44,14 +31,7 @@ interface BaseContract
      * @param int $id
      * @return mixed
      */
-    public function findOneOrFail(int $id);
-
-    /**
-     * Find based on a different column
-     * @param array $data
-     * @return mixed
-     */
-    public function findBy(array $data);
+    public function findOrFail(int $id);
 
     /**
      * Find one based on a different column
@@ -66,6 +46,22 @@ interface BaseContract
      * @return mixed
      */
     public function findOneByOrFail(array $data);
+
+    /**
+     * Find based on a different column
+     * @param array $data
+     * @return mixed
+     */
+    public function findBy(array $data);
+
+    /**
+     * Return all model rows
+     * @param array $columns
+     * @param string $orderBy
+     * @param string $sortBy
+     * @return mixed
+     */
+    public function all($columns = array('*'), string $orderBy = 'id', string $sortBy = 'desc');
 
     /**
      * Delete one by Id

@@ -19,7 +19,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedBigInteger('fan_id');
             $table->unsignedBigInteger('model_id');
             $table->string('title')->nullable();
-            $table->string('body')->nullable();
+            $table->longText('body')->nullable();
             $table->boolean('rating')->default(0);
             $table->boolean('is_approved')->default(0)->comment('1 = Yes, 0 = No');
             $table->boolean('is_active')->default(0)->comment('1 = Yes, 0 = No');

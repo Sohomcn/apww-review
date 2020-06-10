@@ -1,8 +1,11 @@
 <?php
-namespace App\Repositories\Review;
+namespace App\Repositories\User;
 
 use App\User;
-use App\Contracts\Review\UserContract;
+use App\Contracts\User\UserContract;
+
+use App\Repositories\BaseRepository;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -37,7 +40,7 @@ class UserRepository extends BaseRepository implements UserContract
     public function findUserById(int $id)
     {
         try {
-            return $this->findOneOrFail($id);
+            return $this->findOrFail($id);
 
         } catch (ModelNotFoundException $e) {
 

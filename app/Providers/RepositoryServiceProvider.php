@@ -5,8 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\Review\ReviewContract;
 use App\Repositories\Review\ReviewRepository;
-use App\Contracts\Review\UserContract;
-use App\Repositories\Review\UserRepository;
+use App\Contracts\User\UserContract;
+use App\Repositories\User\UserRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

@@ -5,6 +5,7 @@ use App\Models\Review\Review;
 //use App\Traits\UploadAble;
 //use Illuminate\Http\UploadedFile;
 use App\Contracts\Review\ReviewContract;
+use App\Repositories\BaseRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Doctrine\Instantiator\Exception\InvalidArgumentException;
@@ -47,7 +48,7 @@ class ReviewRepository extends BaseRepository implements ReviewContract
     public function findReviewById(int $id)
     {
         try {
-            return $this->findOneOrFail($id);
+            return $this->findOrFail($id);
 
         } catch (ModelNotFoundException $e) {
 

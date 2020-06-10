@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Review;
+namespace App\Services\User;
 
-use App\Contracts\Review\UserContract;
+use App\Contracts\User\UserContract;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\User;

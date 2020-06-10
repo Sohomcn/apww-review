@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Review;
 
 use App\Services\Review\ReviewService;
-use App\Services\Review\UserService;
+use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;

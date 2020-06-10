@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Review;
+namespace App\Repositories;
 
-use App\Contracts\Review\BaseContract;
+use App\Contracts\BaseContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -71,7 +71,7 @@ class BaseRepository implements BaseContract
      * @return mixed
      * @throws ModelNotFoundException
      */
-    public function findOneOrFail(int $id)
+    public function findOrFail(int $id)
     {
         return $this->model->findOrFail($id);
     }
