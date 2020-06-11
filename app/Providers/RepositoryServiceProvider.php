@@ -7,12 +7,15 @@ use App\Contracts\Review\ReviewContract;
 use App\Repositories\Review\ReviewRepository;
 use App\Contracts\User\UserContract;
 use App\Repositories\User\UserRepository;
+use App\Contracts\Post\PostContract;
+use App\Repositories\Post\PostRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repositories = [
         ReviewContract::class        =>  ReviewRepository::class,
         UserContract::class          =>  UserRepository::class,
+        PostContract::class          =>  PostRepository::class,
     ];
 
     /**
