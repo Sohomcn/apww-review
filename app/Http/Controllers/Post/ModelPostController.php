@@ -41,16 +41,9 @@ class ModelPostController extends BaseController
      */
     public function store(Request $request)
     {
-
-        ini_set('memory_limit','256M');
-
         $this->validate($request, [
             //'description'      =>  'required|max:191',
         ]);
-
-       // dd($request->upload_file->getClientOriginalExtension());
-
-        //dd($request->upload_file->getMimeType());
 
 
 

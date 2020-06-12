@@ -44,24 +44,23 @@ trait UploadAble
     {
         $name = !is_null($filename) ? $filename : uniqid();//str_random(25);
 
-        /*$actualVideo = $file->storeAs(
+        $actualVideo = $file->storeAs(
             $folder,
             $name . "." . $file->getClientOriginalExtension(),
             $disk
         );
 
-        //imageResizeAndSave(storage_path('app/public/'.$actualImage), $folder, $name.'.'.$file->getClientOriginalExtension());
-        //return $actualVideo;
-
-        */
+        //imageResizeAndSave(storage_path('app/public/'.$actualVideo), $folder, $name.'.'.$file->getClientOriginalExtension());
+        return $actualVideo;
 
 
-        $file->move(
+
+        /*$file->move(
             storage_path('app/public/' . $folder),
             $name . "." . $file->getClientOriginalExtension()
         );
 
-        return $folder."/" . $name . "." . $file->getClientOriginalExtension();
+        return $folder."/" . $name . "." . $file->getClientOriginalExtension();*/
     }
 
     /**
