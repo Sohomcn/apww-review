@@ -166,15 +166,15 @@
         <center>No Post Found</center>
     @endif
 
-<div class="loader">
+{{-- <div class="loader">
   <h4>Loading...</h4>
   <img height="100px" width="200px" src="https://lh3.googleusercontent.com/-dOI9kypwDQ0/XuJRVce5n6I/AAAAAAAAAOg/JE5OpH9fwZg0RIMrRZLVppQRZJhcws8GgCK8BGAsYHg/s0/2020-06-11.gif">
 </div>
-</div>
+</div> --}}
 
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+ <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.js"></script>
  <script type="text/javascript">
     $(document).ready(function() {
 
@@ -213,7 +213,7 @@
 
     });
 
-  $(window).scroll(function ()
+  /*$(window).scroll(function ()
   {
 
      if($(document).height() <= $(window).scrollTop() + $(window).height())
@@ -222,6 +222,39 @@
         console.log('scroll');
 
       }
+  });*/
+
+  $(".see-more").click(function() {
+      $.get($ul.find("a[rel='next']").attr("href"), function(response) {
+           $posts.append(
+               $(response).find("#posts").html()
+           );
+      });
+
+
+
+      $.ajax({
+          type:'POST',
+          dataType:'JSON',
+          url:"{{route('admin.review.updateStatus')}}",
+          data:{ _token: CSRF_TOKEN, id:review_id, approval_status:check_status},
+          success:function(response)
+          {
+            console.log(response.message);
+            // $('#success-text').text(response.message);
+            // $('#success-msg').show();
+            // $('#success-msg').fadeOut(2000);
+            //swal("Success!", response.message, "success");
+          },
+          error: function()
+          {
+              // $('#error-text').text("Error! Please try again later");
+              // $('#error-msg').show();
+              // $('#error-msg').fadeOut(2000);
+              //swal("Error!", response.message, "error");
+          }
+      });
+
   });
 
 </script>

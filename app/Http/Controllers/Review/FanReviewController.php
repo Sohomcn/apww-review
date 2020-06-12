@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Review;
 
+use App\Http\Requests\Review\ReviewRequest;
 use App\Services\Review\ReviewService;
 use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Auth;
 
 class FanReviewController extends Controller
@@ -58,14 +58,8 @@ class FanReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request)
     {
-        $this->validate($request, [
-            'rating'           => 'required|numeric|min:1|max:5',
-            'title'            => 'required|max:50',
-            'description'      => 'required|max:300',
-        ]);
-
         $params = $request->except('_token');
         $review = $this->reviewService->findOneReviewBy(['model_id' => $params['model_id'], 'fan_id' => Auth::User()->id]);
 
