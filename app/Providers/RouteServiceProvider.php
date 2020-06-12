@@ -47,8 +47,6 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapReviewRoutes();
-
-        $this->mapPostRoutes();
     }
 
     /**
@@ -80,19 +78,6 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/review.php'));
     }
 
-    /**
-     * Define the "post" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapPostRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/post.php'));
-    }
 
     /**
      * Define the "api" routes for the application.
