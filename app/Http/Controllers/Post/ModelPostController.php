@@ -6,6 +6,7 @@ use App\Services\Post\PostService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Auth;
+use FFMpeg;
 
 class ModelPostController extends BaseController
 {
@@ -40,9 +41,19 @@ class ModelPostController extends BaseController
      */
     public function store(Request $request)
     {
+
+        ini_set('memory_limit','256M');
+
         $this->validate($request, [
-            'description'      =>  'required|max:191',
+            //'description'      =>  'required|max:191',
         ]);
+
+       // dd($request->upload_file->getClientOriginalExtension());
+
+        //dd($request->upload_file->getMimeType());
+
+
+
         $params = $request->except('_token');
         $post = $this->postService->createPost($params);
 

@@ -28,9 +28,40 @@ trait UploadAble
             $name . "." . $file->getClientOriginalExtension(),
             $disk
         );
-        imageResizeAndSave(storage_path('app/public/'.$actualImage), $folder, $name.'.'.$file->getClientOriginalExtension());
+       // imageResizeAndSave(storage_path('app/public/'.$actualImage), $folder, $name.'.'.$file->getClientOriginalExtension());
 
         return $actualImage;
+    }
+
+    /**
+     * @param UploadedFile $file
+     * @param null $folder
+     * @param string $disk
+     * @param null $filename
+     * @return false|string
+     */
+    public function uploadOneVideo(UploadedFile $file, $folder = null, $disk = 'public', $filename = null)
+    {
+        $name = !is_null($filename) ? $filename : uniqid();//str_random(25);
+
+        /*$actualVideo = $file->storeAs(
+            $folder,
+            $name . "." . $file->getClientOriginalExtension(),
+            $disk
+        );
+
+        //imageResizeAndSave(storage_path('app/public/'.$actualImage), $folder, $name.'.'.$file->getClientOriginalExtension());
+        //return $actualVideo;
+
+        */
+
+
+        $file->move(
+            storage_path('app/public/' . $folder),
+            $name . "." . $file->getClientOriginalExtension()
+        );
+
+        return $folder."/" . $name . "." . $file->getClientOriginalExtension();
     }
 
     /**

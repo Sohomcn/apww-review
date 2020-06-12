@@ -18,7 +18,7 @@ class PostService
 
     public function listAllPosts(string $order = 'id', string $sort = 'desc', array $columns = ['*'], array $where = [])
     {
-        return $this->postRepository->listPosts();
+        return $this->postRepository->listPosts($order ,$sort , $columns , $where);
     }
 
     public function createPost(array $params){

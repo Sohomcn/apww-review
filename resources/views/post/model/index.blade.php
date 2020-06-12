@@ -36,6 +36,11 @@
 .prflPadding{
   padding: 8px;
 }
+
+.loader{
+  text-align: center;
+  padding:50px;
+}
 </style>
 
 <div class="container optionBG">
@@ -69,8 +74,8 @@
                 </div>
               </div>
               <div class="col-sm-3">
-                <div class="form-group">
-                  <input type="number" class="form-control amountInput" name="amount" placeholder="amount">
+                <div class="form-group amountDiv">
+                  <input type="number" class="form-control" id="amount" name="amount" placeholder="amount">
                 </div>
               </div>
             </div>
@@ -97,7 +102,7 @@
       <div class="col-sm-4"></div>
     </div>
 
-    @if($posts)
+    @if($posts->count())
         @foreach($posts as $post)
           <div class="row topPadding">
             <div class="col-sm-3"></div>
@@ -158,59 +163,13 @@
           </div>
         @endforeach
     @else
-        No Post Found
+        <center>No Post Found</center>
     @endif
 
-    {{-- <div class="row topPadding">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-5 fullBlock">
-        <div>
-          <span><b>Model Name</b></span>
-          <span style="display:inline;float:right;">3 minutes ago</span>
-        </div>
-        <video width="100%"  controls>
-          <source src="{{ asset('post/testvideo1.mp4') }}" type="video/mp4">
-          Your browser does not support video.
-        </video>
-        <div>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </div>
-
-        <div class="row">
-          <div class="col-sm-3 optionBG vl">Add to cart</div>
-          <div class="col-sm-3 optionBG vl">Send Message</div>
-          <div class="col-sm-3 optionBG vl">Call me</div>
-          <div class="col-sm-3 optionBG vl">Send a tip</div>
-        </div>
-        <hr>
-      </div>
-      <div class="col-sm-4"></div>
-    </div>
-
-    <div class="row topPadding">
-      <div class="col-sm-3"></div>
-      <div class="col-sm-5 fullBlock">
-        <div>
-          <span><b>Model Name</b></span>
-          <span style="display:inline;float:right;">3 minutes ago</span>
-        </div>
-          <iframe width="100%" height="400px"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY">
-          </iframe>
-        <div>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-        </div>
-
-        <div class="row">
-          <div class="col-sm-3 optionBG vl">Add to cart</div>
-          <div class="col-sm-3 optionBG vl">Send Message</div>
-          <div class="col-sm-3 optionBG vl">Call me</div>
-          <div class="col-sm-3 optionBG vl">Send a tip</div>
-        </div>
-        <hr>
-      </div>
-      <div class="col-sm-4"></div>
-    </div> --}}
+<div class="loader">
+  <h4>Loading...</h4>
+  <img height="100px" width="200px" src="https://lh3.googleusercontent.com/-dOI9kypwDQ0/XuJRVce5n6I/AAAAAAAAAOg/JE5OpH9fwZg0RIMrRZLVppQRZJhcws8GgCK8BGAsYHg/s0/2020-06-11.gif">
+</div>
 </div>
 
 
@@ -219,11 +178,51 @@
  <script type="text/javascript">
     $(document).ready(function() {
 
+        $(':input[type="submit"]').prop('disabled', true);
 
-        $("#postForm").on("click",function(){
-            $('#form1').submit();
-        })
+        $('#description').keyup(function() {
+            if($('#description').val().length){
+              $(':input[type="submit"]').prop('disabled', false);
+            }else{
+
+              if(document.getElementById("upload_file").files.length == 0){
+                $(':input[type="submit"]').prop('disabled', true);
+              }else{
+                $(':input[type="submit"]').prop('disabled', false);
+              }
+            }
+        });
+
+        $("input:file").change(function (){
+          $(':input[type="submit"]').prop('disabled', false);
+        });
+
+        $('.amountDiv').hide();
+        $('input[type=radio][name=price_type]').change(function() {
+          if (this.value==1) {
+              $('.amountDiv').show();
+              $('#amount').val('');
+          }
+          else {
+              $('.amountDiv').hide();
+              $('#amount').val('');
+          }
+        });
+
+        $('.loader').hide();
+
     });
+
+  $(window).scroll(function ()
+  {
+
+     if($(document).height() <= $(window).scrollTop() + $(window).height())
+      {
+        $('.loader').show();
+        console.log('scroll');
+
+      }
+  });
 
 </script>
 

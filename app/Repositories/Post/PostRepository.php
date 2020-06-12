@@ -64,17 +64,38 @@ class PostRepository extends BaseRepository implements PostContract
     {
         try {
                 $collection = collect($params);
-                $image = null;
-                if ($collection->has('upload_file') && ($params['upload_file'] instanceof UploadedFile)) {
-                    $image = $this->uploadOne($params['upload_file'], 'post/image');
+                $file_name = null;
+                $post_type = 0;
+
+                if ($collection->has('upload_file')){
+                    $upload_file_ext = $params['upload_file']->getClientOriginalExtension();
+
+                    $image_ext = ['gif', 'jpg', 'png','jepg'];
+                    $video_ext = ['ogg', 'ogv', 'avi', 'mpe?g', 'mov', 'wmv', 'flv', 'mp4'];
+
+                    if(in_array($upload_file_ext, $image_ext)){
+                        if ($params['upload_file'] instanceof UploadedFile) {
+                            $file_name = $this->uploadOne($params['upload_file'], 'post/image');
+                        }
+                        $post_type = 1;
+                    }
+
+                    else if(in_array($upload_file_ext, $video_ext)){
+                        if ($params['upload_file'] instanceof UploadedFile) {
+                            $file_name = $this->uploadOneVideo($params['upload_file'], 'post/video');
+                        }
+                        $post_type = 2;
+                    }
+
                 }
+
 
             $post = new Post;
             $post->model_id = Auth::User()->id;
             $post->price_type = $collection['price_type'];
             $post->amount = number_format($collection['amount'],2);
-            $post->post_type = 1;//$collection->has('status') ? true : false;
-            $post->file = $image;
+            $post->post_type = $post_type;
+            $post->file = $file_name;
             $post->description = $collection['description'];
             $post->save();
             return $post;

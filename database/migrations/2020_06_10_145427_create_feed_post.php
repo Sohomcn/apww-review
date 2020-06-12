@@ -20,7 +20,7 @@ class CreateFeedPost extends Migration
             $table->decimal('amount',10,2)->default(0);
             $table->boolean('post_type')->default(0)->comment('1 = Image, 2 = Video');
             $table->string('file')->nullable();
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8';
